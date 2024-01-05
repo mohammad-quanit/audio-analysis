@@ -1,10 +1,10 @@
 import express from "express";
-import router from "./Routes/fileUpload.route";
+import router from "./Routes/index.route";
 
 const app = express();
-app.use(express.json());
+const PORT: number | string = process.env.PORT || 3000;
 
-const PORT = 3000;
+app.use(express.json());
 
 app.use('/api/v1', router);
 

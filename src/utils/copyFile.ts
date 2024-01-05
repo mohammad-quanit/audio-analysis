@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, copyFileSync } from "fs";
 import { join } from "path";
-import { fileName, uploadDir } from "./Constants";
+import { fileName, uploadDir } from "../Constants";
 
 // Source directory where MP3 file resides
 const sourceDirectory: string = uploadDir;
