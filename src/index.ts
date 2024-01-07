@@ -1,5 +1,5 @@
 import express from "express";
-import router from "./Routes/index.route";
+import { router } from "./Routes/index.route";
 
 const app = express();
 const PORT: number | string = process.env.PORT || 3000;
@@ -8,9 +8,24 @@ app.use(express.json());
 
 app.use('/api/v1', router);
 
-app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`)
-);
+const server = app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+
+// Handling Gracefull shutdown to avoid any leaks and issues
+process.on('SIGINT', () => {
+  console.log('*** Interupt Signal received: Closing Web server & Processes ****');
+  server.close(() => process.exit(0));
+})
+
+process.on('SIGTERM', () => {
+  console.log('*** SIGTERM received: Closing Web server & Processes ****');
+  server.close(() => process.exit(0));
+});
+
+
+
+
+
+
 
 
 
