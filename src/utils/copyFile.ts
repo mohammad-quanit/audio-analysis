@@ -28,10 +28,10 @@ export default function assetsCopied(): boolean {
 
     // Copy the file
     copyFileSync(sourceFile, destinationFile);
-    console.log(`${mp3FileName} copied to ${destinationDirectory}`);
+    // console.log(`File copied to ${destinationDirectory}`);
     isCopied = true;
   } else {
-    console.error(`${mp3FileName} not found in ${sourceDirectory}`);
+    console.error(`File not found in ${sourceDirectory}`);
     isCopied = false;
   }
 

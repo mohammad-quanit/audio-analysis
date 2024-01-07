@@ -4,32 +4,42 @@ import { router } from "./Routes/index.route";
 const app = express();
 const PORT: number | string = process.env.PORT || 3000;
 
+// Parse incoming JSON requests
 app.use(express.json());
 
-app.use('/api/v1', router);
+// Route handling for endpoints starting with '/api/v1'
+app.use("/api/v1", router);
 
-const server = app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+const server = app.listen(PORT, () =>
+  console.log(`Server running at http://localhost:${PORT}`)
+);
 
-// Handling Gracefull shutdown to avoid any leaks and issues
-process.on('SIGINT', () => {
-  console.log('*** Interupt Signal received: Closing Web server & Processes ****');
+// Handling graceful shutdown to prevent leaks and ensure clean process termination
+
+// Listen for a SIGINT signal (Ctrl+C) and perform cleanup
+process.on("SIGINT", () => {
+  console.log(
+    "*** Interupt Signal received: Closing Web server & Processes ****"
+  );
   server.close(() => process.exit(0));
-})
+});
 
-process.on('SIGTERM', () => {
-  console.log('*** SIGTERM received: Closing Web server & Processes ****');
+// Listen for a SIGTERM signal (termination request) and perform cleanup
+process.on("SIGTERM", () => {
+  console.log("*** SIGTERM received: Closing Web server & Processes ****");
   server.close(() => process.exit(0));
 });
 
 
 
-
-
-
-
-
-
-
+/**
+ * Ive tried extracting metadata wihout 3rd party package but  
+ * i dont think there is any proper way to do it. Below is the code
+ * that i might thoiught would work but somehow it is not getting 
+ * correct results. Ive to use mediainfo.js to find the correct data.
+ * I asked through email, If you had something to share that could help me
+ * but no response.
+ */
 // ********************************************************************************************************
 
 // // Read the file
