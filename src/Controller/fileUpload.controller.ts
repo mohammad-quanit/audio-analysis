@@ -15,10 +15,6 @@ const fileUploadController = async (req: Request, res: Response): Promise<void> 
     try {
       // Extract the frame count from the uploaded file using a service function
       const frameCount = await fileFrameCountExtract();
-      if(!frameCount) {
-        res.status(200).json({ frameCount: "No Frame Counts found!" })
-        return
-      }
       res.status(200).json({ frameCount }); // Send the extracted frame count in the response
     } catch (error) {
       console.log(error)

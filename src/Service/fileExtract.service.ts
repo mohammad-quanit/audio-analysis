@@ -3,7 +3,7 @@ import { getFileSize, readChunk } from "../utils/helpers";
 import { mediaFormat } from "../Constants";
 
 // Function to extract frame count from a media file
-export const fileFrameCountExtract = async (): Promise<number | undefined> => {
+export const fileFrameCountExtract = async (): Promise<number | string> => {
   try {
     // Creating a MediaInfo instance with specified format
     const mi = await MediaInfoFactory({ format: mediaFormat });
@@ -21,6 +21,7 @@ export const fileFrameCountExtract = async (): Promise<number | undefined> => {
 
     // If frame count exists, return it;
     if (frameCount) return frameCount;
+    return "Frame Counts not found!"
   } catch (error) {
     throw new Error("Error analyzing file");
   }
